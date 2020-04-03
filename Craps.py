@@ -3,9 +3,9 @@ objetivo: simular jogo de apostas Craps
 Autor: Bernardo Cunha Capoferri 
 python ver.: 3.7.4 64-bit, Coded in VScode """
 
-# Importa Funções das apostas
+# Importa Funções das apostas e randint
 import FuncaoApostas as FA
-
+from random import randint
 # Começo do jogo
 def comeco_jogo():
 # valor booleano que decide se o jogo deve continuar
@@ -24,14 +24,13 @@ def comeco_jogo():
             print('Você terminou com {} fichas. muito obrigado por ter jogado!'.format(creditos))
             queroJogar = False
 # Aposta Pass Line Bet
-        if comeOut:
-            print('Fase: "Come Out"')
-            aposta_plb = int(input('Quanto quer apostar no Pass Line Bet? '))
+        print('Fase: "Come Out"')
+        aposta_plb = int(input('Quanto quer apostar no Pass Line Bet? '))
 # Checa valores digitados
-            if aposta_plb > creditos or aposta_plb < 0:
-                print('Valor inválido por favor insira um valor válido.')
-                continue
-            creditos -= aposta_plb
+        if aposta_plb > creditos or aposta_plb < 0:
+            print('Valor inválido por favor insira um valor válido.')
+            continue
+        creditos -= aposta_plb
 # Pergunta se quer fazer aposta field
         quer_fazer_aposta_field = input('Você quer fazer uma aposta Field? ("s"/"n") ')
 # Checa Valores digitados
@@ -76,8 +75,57 @@ def comeco_jogo():
         if creditos == 0:
             print('Você não tem mais fichas, o jogo acabou.')
             queroJogar = False
-        
-        
+# valor randomizado geral para apostas
+        dado1 = randint(1, 6)
+        dado2 = randint(1, 6)
+# Checa ganhou/perdeu Comeout ou se foi para fase point
+        resultado_CO = FA.Pass_Line_Bet(aposta_plb, dado1, dado2)
+        # soma_apostas_F_AC_T = 
+        if resultado_CO[0]:
+            creditos += soma_apostas_F_AC_T + resultado_CO[1]
+        else:
+            comeOut = False
+            valor_point = resultado_CO[1]
+            print('Fase: "Point""')
+            print('O valor point é {}'.format(valor_point))
+            while not comeOut:
+                dado1 = randint(1, 6)
+                dado2 = randint(1, 6)
+                # Repetição das perguntas da fase Come Out
+                quer_fazer_aposta_field
+                if quer_fazer_aposta_field != 'n' and quer_fazer_aposta_field != 's':
+                    print('Letra inválida por favor insira uma letra válida.')
+                    continue
+                if quer_fazer_aposta_field == 's':
+                    aposta_field
+                    if aposta_field > creditos or aposta_field < 0:
+                        print('Valor inválido por favor insira um valor válido.')
+                        continue
+                    creditos -= aposta_field
+                # Pergunta aposta Any Craps
+                quer_fazer_aposta_ACraps
+                if quer_fazer_aposta_ACraps != 'n' and quer_fazer_aposta_ACraps != 's':
+                    print('Letra inválida por favor insira uma letra válida.')
+                    continue
+                if quer_fazer_aposta_ACraps == 's':
+                    aposta_ACraps
+                    if aposta_ACraps > creditos or aposta_ACraps < 0:
+                        print('Valor inválido por favor insira um valor válido.')
+                        continue
+                    creditos -= aposta_ACraps
+                # Pergunta aposta twelve
+                quer_fazer_aposta_twelve
+                if quer_fazer_aposta_twelve != 'n' and quer_fazer_aposta_twelve != 's':
+                    print('Letra inválida por favor insira uma letra válida.')
+                    continue
+                if quer_fazer_aposta_field == 's':
+                    aposta_twelve
+                    if aposta_twelve > creditos or aposta_twelve < 0:
+                        print('Valor inválido por favor insira um valor válido.')
+                        continue
+                    creditos -= aposta_twelve
+                # Começo da fase Point
+                resultado_P = 
         
 
 #inicializa programa
