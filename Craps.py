@@ -23,6 +23,7 @@ def comeco_jogo():
         if cash_out == 'n':
             print('Você terminou com {} fichas. muito obrigado por ter jogado!'.format(creditos))
             queroJogar = False
+            break
 # Aposta Pass Line Bet
         print('Fase: "Come Out"')
         aposta_plb = int(input('Quanto quer apostar no Pass Line Bet? '))

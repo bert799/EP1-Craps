@@ -27,7 +27,7 @@ def fase_point(valor_point, aposta_plb, dado1, dado2):
         print('Parabéns, você ganhou a fase Point!')
         return lucro
     elif soma_dados == 7:
-        prejuizo = 0
+        prejuizo = True
         print('Você perdeu a aposta Point.')
         return prejuizo
     else:
