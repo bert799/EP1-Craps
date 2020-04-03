@@ -30,7 +30,6 @@ def comeco_jogo():
 # Checa valores digitados
         if aposta_plb > creditos or aposta_plb < 0:
             print('Valor inválido por favor insira um valor válido.')
-            creditos += aposta_plb
             continue
         creditos -= aposta_plb
 # Pergunta se quer fazer aposta field
@@ -125,6 +124,8 @@ def comeco_jogo():
                         print('Valor inválido por favor insira um valor válido.')
                         continue
                     creditos -= aposta_field
+                else:
+                    aposta_field = 0
                 # Pergunta aposta Any Craps
                 quer_fazer_aposta_ACraps = input('Você quer fazer uma aposta Any Craps? ("s"/"n") ')
                 if quer_fazer_aposta_ACraps != 'n' and quer_fazer_aposta_ACraps != 's':
@@ -137,6 +138,8 @@ def comeco_jogo():
                         creditos += aposta_field
                         continue
                     creditos -= aposta_ACraps
+                else:
+                    aposta_ACraps = 0
                 # Pergunta aposta twelve
                 quer_fazer_aposta_twelve = input('Você quer fazer uma aposta Twelve? ("s"/"n") ')
                 if quer_fazer_aposta_twelve != 'n' and quer_fazer_aposta_twelve != 's':
@@ -150,6 +153,8 @@ def comeco_jogo():
                         creditos += aposta_ACraps
                         continue
                     creditos -= aposta_twelve
+                else:
+                    aposta_twelve = 0
                 # Começo da fase Point
                 resultado_P = FA.fase_point(valor_point, aposta_plb, dado1, dado2)
                 resultado_field = FA.field_bet(aposta_field, dado1, dado2)
