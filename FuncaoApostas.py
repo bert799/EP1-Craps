@@ -35,6 +35,9 @@ def fase_point(valor_point, aposta_plb, dado1, dado2):
         return False
 # Função que simula aposta field
 def field_bet(aposta_field, dado1, dado2):
+    # Caso a aposta seja 0 não ocorre a operação
+    if aposta_field == 0:
+        return 0
     soma_dados = dado1 + dado2
     if soma_dados == 3 or soma_dados == 4 or soma_dados == 9 or soma_dados == 10 or soma_dados == 11:
         print('Parabéns, você ganhou a aposta Field!')
@@ -54,6 +57,9 @@ def field_bet(aposta_field, dado1, dado2):
         return prejuizo
 # Função que simula aposta Any Craps 
 def any_craps(aposta_ACraps, dado1, dado2):
+    # Caso a aposta seja 0 não ocorre a operação
+    if aposta_ACraps == 0:
+        return 0
     soma_dados = dado1 + dado2
     if soma_dados == 2 or soma_dados == 3 or soma_dados == 12:
         print('Você ganhou SETE vezes o que apostou na aposta Any Craps!')
@@ -65,6 +71,9 @@ def any_craps(aposta_ACraps, dado1, dado2):
         return prejuizo
 # Função que simula aposta Twelve
 def twelve(aposta_twelve, dado1, dado2):
+    # Caso a aposta seja 0 não ocorre a operação
+    if aposta_twelve == 0:
+        return 0
     soma_dados = dado1 + dado2
     if soma_dados == 12:
         print('Você ganhou TRINTA vezes o que apostou na aposta Twelve!!!')

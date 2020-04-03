@@ -47,6 +47,9 @@ def comeco_jogo():
                 creditos += aposta_plb
                 continue
             creditos -= aposta_field
+            # Caso não queira digitar valor este se torna 0
+        elif quer_fazer_aposta_field == 'n':
+            aposta_field = 0
 # Pergunta se quer fazer aposta Any Craps
         quer_fazer_aposta_ACraps = input('Você quer fazer uma aposta Any Craps? ("s"/"n") ')
 # Checa Valores digitados
@@ -63,6 +66,9 @@ def comeco_jogo():
                 creditos += aposta_field
                 continue
             creditos -= aposta_ACraps
+            # Caso não queira digitar valor este se torna 0
+        elif quer_fazer_aposta_ACraps == 'n':
+            aposta_ACraps = 0
 # Pergunta se quer fazer aposta Twelve
         quer_fazer_aposta_twelve = input('Você quer fazer uma aposta Twelve? ("s"/"n") ')
 # Checa Valores digitados
@@ -80,6 +86,9 @@ def comeco_jogo():
                 creditos += aposta_ACraps
                 continue
             creditos -= aposta_twelve
+            # Caso não queira digitar valor este se torna 0
+        elif quer_fazer_aposta_twelve == 'n':
+            aposta_twelve = 0
 # valor randomizado geral para apostas
         dado1 = randint(1, 6)
         dado2 = randint(1, 6)
