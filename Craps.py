@@ -76,7 +76,7 @@ def comeco_jogo():
             print('Letra inválida por favor insira uma letra válida.')
             continue
 # Pergunta valor aposta Twelve
-        if quer_fazer_aposta_field == 's':
+        if quer_fazer_aposta_twelve == 's':
             aposta_twelve = int(input('Quanto quer apostar na Twelve? '))
 # Checa Valores digitados
             if aposta_twelve > creditos or aposta_twelve < 0:
