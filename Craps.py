@@ -29,6 +29,7 @@ def comeco_jogo():
 # Checa valores digitados
         if aposta_plb > creditos or aposta_plb < 0:
             print('Valor inválido por favor insira um valor válido.')
+            creditos += aposta_plb
             continue
         creditos -= aposta_plb
 # Pergunta se quer fazer aposta field
@@ -43,6 +44,7 @@ def comeco_jogo():
 # Checa Valores digitados
             if aposta_field > creditos or aposta_field < 0:
                 print('Valor inválido por favor insira um valor válido.')
+                creditos += aposta_plb
                 continue
             creditos -= aposta_field
 # Pergunta se quer fazer aposta Any Craps
@@ -57,7 +59,10 @@ def comeco_jogo():
 # Checa Valores digitados
             if aposta_ACraps > creditos or aposta_ACraps < 0:
                 print('Valor inválido por favor insira um valor válido.')
+                creditos += aposta_plb
+                creditos += aposta_field
                 continue
+            creditos -= aposta_ACraps
 # Pergunta se quer fazer aposta Twelve
         quer_fazer_aposta_twelve = input('Você quer fazer uma aposta Twelve? ("s"/"n") ')
 # Checa Valores digitados
@@ -70,62 +75,89 @@ def comeco_jogo():
 # Checa Valores digitados
             if aposta_twelve > creditos or aposta_twelve < 0:
                 print('Valor inválido por favor insira um valor válido.')
+                creditos += aposta_plb
+                creditos += aposta_field
+                creditos += aposta_ACraps
                 continue
-# Caso perca todas as fichas
-        if creditos == 0:
-            print('Você não tem mais fichas, o jogo acabou.')
-            queroJogar = False
+            creditos -= aposta_twelve
 # valor randomizado geral para apostas
         dado1 = randint(1, 6)
         dado2 = randint(1, 6)
 # Checa ganhou/perdeu Comeout ou se foi para fase point
         resultado_CO = FA.Pass_Line_Bet(aposta_plb, dado1, dado2)
-        # soma_apostas_F_AC_T = 
+        resultado_field = FA.field_bet(aposta_field, dado1,dado2)
+        resultado_ACraps = FA.any_craps(aposta_ACraps, dado1, dado2)
+        resultado_twelve = FA.twelve (aposta_twelve, dado1, dado2)
+        soma_apostas_F_AC_T = resultado_ACraps + resultado_field + resultado_twelve
         if resultado_CO[0]:
             creditos += soma_apostas_F_AC_T + resultado_CO[1]
+# Começo fase Point
         else:
             comeOut = False
             valor_point = resultado_CO[1]
             print('Fase: "Point""')
             print('O valor point é {}'.format(valor_point))
             while not comeOut:
+                print('Você tem {} fichas'.format(creditos))
                 dado1 = randint(1, 6)
                 dado2 = randint(1, 6)
                 # Repetição das perguntas da fase Come Out
-                quer_fazer_aposta_field
+                quer_fazer_aposta_field = input('Você quer fazer uma aposta Field? ("s"/"n") ')
+                # Checa Valores digitados
                 if quer_fazer_aposta_field != 'n' and quer_fazer_aposta_field != 's':
                     print('Letra inválida por favor insira uma letra válida.')
                     continue
+                # Pergunta valor aposta Field
                 if quer_fazer_aposta_field == 's':
-                    aposta_field
+                    aposta_field = int(input('Quanto quer apostar na Field? '))
+                # Checa Valores digitados
                     if aposta_field > creditos or aposta_field < 0:
                         print('Valor inválido por favor insira um valor válido.')
+                        creditos += aposta_field
                         continue
                     creditos -= aposta_field
                 # Pergunta aposta Any Craps
-                quer_fazer_aposta_ACraps
+                quer_fazer_aposta_ACraps = input('Você quer fazer uma aposta Any Craps? ("s"/"n") ')
                 if quer_fazer_aposta_ACraps != 'n' and quer_fazer_aposta_ACraps != 's':
                     print('Letra inválida por favor insira uma letra válida.')
                     continue
                 if quer_fazer_aposta_ACraps == 's':
-                    aposta_ACraps
+                    aposta_ACraps = int(input('Quanto quer apostar no Any Craps? '))
                     if aposta_ACraps > creditos or aposta_ACraps < 0:
                         print('Valor inválido por favor insira um valor válido.')
+                        creditos += aposta_field
                         continue
                     creditos -= aposta_ACraps
                 # Pergunta aposta twelve
-                quer_fazer_aposta_twelve
+                quer_fazer_aposta_twelve = input('Você quer fazer uma aposta Twelve? ("s"/"n") ')
                 if quer_fazer_aposta_twelve != 'n' and quer_fazer_aposta_twelve != 's':
                     print('Letra inválida por favor insira uma letra válida.')
                     continue
                 if quer_fazer_aposta_field == 's':
-                    aposta_twelve
+                    aposta_twelve = int(input('Quanto quer apostar na Twelve? '))
                     if aposta_twelve > creditos or aposta_twelve < 0:
                         print('Valor inválido por favor insira um valor válido.')
+                        creditos += aposta_field
+                        creditos += aposta_ACraps
                         continue
                     creditos -= aposta_twelve
                 # Começo da fase Point
-                resultado_P = 
+                resultado_P = FA.fase_point(valor_point, aposta_plb, dado1, dado2)
+                resultado_field = FA.field_bet(aposta_field, dado1, dado2)
+                resultado_ACraps = FA.any_craps(aposta_ACraps, dado1, dado2)
+                resultado_twelve = FA.twelve(aposta_twelve, dado1, dado2)
+                soma_apostas_F_AC_T = resultado_ACraps + resultado_field + resultado_twelve
+                # Checa se fase point alcançou o fim
+                if resultado_P:
+                    comeOut = True
+                    creditos += soma_apostas_F_AC_T + resultado_P
+                    break
+                else:
+                    creditos += soma_apostas_F_AC_T
+        # Caso perca todas as fichas
+        if creditos == 0:
+            print('Você não tem mais fichas, o jogo acabou.')
+            queroJogar = False
         
 
 #inicializa programa
