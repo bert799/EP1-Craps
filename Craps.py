@@ -122,7 +122,6 @@ def comeco_jogo():
                 # Checa Valores digitados
                     if aposta_field > creditos or aposta_field < 0:
                         print('Valor inválido por favor insira um valor válido.')
-                        creditos += aposta_field
                         continue
                     creditos -= aposta_field
                 # Pergunta aposta Any Craps
@@ -142,7 +141,7 @@ def comeco_jogo():
                 if quer_fazer_aposta_twelve != 'n' and quer_fazer_aposta_twelve != 's':
                     print('Letra inválida por favor insira uma letra válida.')
                     continue
-                if quer_fazer_aposta_field == 's':
+                if quer_fazer_aposta_twelve == 's':
                     aposta_twelve = int(input('Quanto quer apostar na Twelve? '))
                     if aposta_twelve > creditos or aposta_twelve < 0:
                         print('Valor inválido por favor insira um valor válido.')
